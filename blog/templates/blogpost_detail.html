@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
+{% load comments %}
+
 {% block head_title %}{{ post.title }}{% endblock %}
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-    <h2><a>{{ post.title }}</a></h2>
-    <p>{{ post.posted }} - By {{ post.author }}</p>
-    <p>{{ post.body }}</p>
+    <div class="md1-card md1-shadow--2dp">
+        <div class="md1-card__title">
+            <h2 class="md1-card__title-text"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+        </div>
+        <div class="md1-card__supporting-text">
+            {{ post.body }}
+        </div>
+        <div class="md1-card_actions">
+            {{ post.posted }} - By {{ post.author }}
+        </div>
+    </div>
+
+{% render_comment_list for post %}
 {% endblock %}

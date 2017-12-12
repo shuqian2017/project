@@ -19,6 +19,8 @@ from django import views
 from django.conf.urls.static import static
 from blogpost import views
 
-urlpatterns = (url(r'^$', views.index, name="main"),
+urlpatterns = [url(r'^$', views.index, name="main"),
                url(r'^admin/', include(admin.site.urls)),
-               url(r'^blog/(?P<slug>[^\.]+).html', views.view_post, name='view_blog_post'),)
+               url(r'^blog/(?P<slug>[^\.]+).html', views.view_post, name='view_blog_post'),
+               url(r'^pages/', include('django.contrib.flatpages.urls')),
+               url(r'^comments/', include('django_comments.urls')), ]
