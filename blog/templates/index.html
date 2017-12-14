@@ -2,10 +2,21 @@
 {% block title %}Welcome to my blog{% endblock %}
 
 {% block content %}
-    <h1>请相信美好的事情即将发生！</h1>
-    {% for post in posts %}
-        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-        <p>{{ post.posted }} - By {{ post.author }}</p>
-        <p>{{ post.body }}</p>
-    {% endfor %}
+    <h1><center><b>请相信美好的事情即将发生！</b></center><br>
+    <center>Please believe beautiful things are coming!</center>
+    </h1>
+
+    <div class="row">
+        {% if posts %}
+        {% for post in posts %}
+         <div class="col-sm-4">
+            <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+            {{ post.body | slice:":80"}}
+            {{ post.posted }} - By {{ post.author }}
+         </div>
+        {% endfor %}
+        {% else %}
+        <p>There are no posts.</p>
+        {% endif %}
+    </div>
 {% endblock %}
