@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'django_comments',
     'rest_framework',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [

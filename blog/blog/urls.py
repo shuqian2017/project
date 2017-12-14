@@ -18,9 +18,20 @@ from django.contrib import admin
 from django import views
 from django.conf.urls.static import static
 from blogpost import views
+from sitemap.sitemaps import PageSitemap, FlatPageSitemap, BlogSitemap
+from django.contrib.sitemaps.views import sitemap
+from django.conf import settings
+
+sitemaps = {
+    "page": PageSitemap,
+    "flatpages": FlatPageSitemap,
+    "blog": BlogSitemap
+}
 
 urlpatterns = [url(r'^$', views.index, name="main"),
                url(r'^admin/', include(admin.site.urls)),
                url(r'^blog/(?P<slug>[^\.]+).html', views.view_post, name='view_blog_post'),
                url(r'^pages/', include('django.contrib.flatpages.urls')),
-               url(r'^comments/', include('django_comments.urls')), ]
+               url(r'^comments/', include('django_comments.urls')),
+               url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'), ]\
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
